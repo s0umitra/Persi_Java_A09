@@ -1,0 +1,8 @@
+1, Barfi, Drama, Hindi, 2012-04-23, Ranbir Priyanka, 7.7, 12433.45
+2, Avengers, Action, English, 2012-05-04, Chris Robert, 8.5, 43523.54
+3, Three Idiots, Drama, Hindi, 2012-04-06, Amir, 9.3, 98432.5
+4, Student of the Year, Drama, Hindi, 2012-10-03, Varun Alia Siddhart, 6.9, 16523.0
+5, Talaash, Thriller, Hindi, 2010-12-12, Amir Kareena, 7.9, 56511.23
+6, Madagaskar, Animated, english, 2012-05-04, Alex Brad, 7.5, 34853.1432
+7, Sparsh, Drama, Marathi, 2012-06-05, Sachin, 8.1, 4231.42
+8, Mi Shivaji, Drama, marathi, 2012-06-06, Mahesh Sachin Makarand, 7.95, 11243.98
