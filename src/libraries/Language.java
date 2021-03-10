@@ -1,6 +1,6 @@
 package libraries;
 
-public class Language  {
+public class Language  implements java.io.Serializable {
     public String language;
 
     public void setLanguage(String lang) {

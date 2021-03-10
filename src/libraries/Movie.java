@@ -1,9 +1,10 @@
 package libraries;
 
+import java.io.Serializable;
 import java.util.List;
 
 
-public class Movie {
+public class Movie implements Serializable {
 
     private int movieId;
     private String movieName;

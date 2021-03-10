@@ -1,8 +1,6 @@
 package libraries;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.*;
@@ -57,7 +55,7 @@ public class MovieManager implements java.io.Serializable {
         return new Movie(movieId, movieName, c, l, date.getDateFromString(releaseDate), casting, rating, totalBusinessDone);
     }
 
-    public List<Movie> deserializeMovie(String path) {
+    public List<Movie> readFromFile(String path) {
         File file = new File(path);
         System.out.println("Read movies from " + path);
         return readFile(file);
@@ -90,17 +88,21 @@ public class MovieManager implements java.io.Serializable {
     public void serializeMovies(List<Movie> movies, String fileName) throws IOException {
 
         String cwd = Paths.get("").toAbsolutePath().toString();
-        File file = new File(cwd + "\\" + fileName);
-        FileWriter fw = new FileWriter(file.getAbsoluteFile());
+        FileOutputStream fos = new FileOutputStream(cwd + "\\" + fileName);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-        for (Movie m : movies) {
-            fw.append(m.toString()).append("\n");
-        }
+        oos.writeObject(movies);
+        oos.flush();
+        oos.close();
 
-        fw.flush();
-        fw.close();
+        System.out.println("Movies Serialized to: " + fileName);
+    }
 
-        System.out.println("Movies saved to: " + fileName);
+    public List<Movie> deserializeMovie(String filename) throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(filename);
+        ObjectInputStream ois =new ObjectInputStream(fis);
+
+        return (List<Movie>) ois.readObject();
     }
 
     public Movie getMovieById(int id, List<Movie> movies) {

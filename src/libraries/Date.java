@@ -3,7 +3,7 @@ package libraries;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-public class Date {
+public class Date implements java.io.Serializable {
 
     SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd");
 

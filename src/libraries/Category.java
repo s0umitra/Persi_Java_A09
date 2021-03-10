@@ -1,6 +1,6 @@
 package libraries;
 
-public class Category {
+public class Category implements java.io.Serializable {
     public String categoryName;
     
     public void setCategoryName(String cat) {

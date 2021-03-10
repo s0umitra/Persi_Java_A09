@@ -69,17 +69,18 @@ public class RunSystem {
         movies = mm.populateMovies(file);
 
         do {
-            System.out.print("\n1)  Deserialize Movies from a file\n");
+            System.out.print("\n1)  Read Movies from a file\n");
             System.out.print("2)  Export Movies to Database\n");
             System.out.print("3)  Add a new Movie\n");
             System.out.print("4)  Serialize Movies to a file\n");
-            System.out.print("5)  Filter Movies by Release Year\n");
-            System.out.print("6)  Filter Movies by Actor[s]\n");
-            System.out.print("7)  Update a Movie's Ratings\n");
-            System.out.print("8)  Update a Movie's Business Done\n");
-            System.out.print("9)  Filter Movies by Business Done\n");
-            System.out.print("10) Show Movies\n");
-            System.out.print("11) Exit\n");
+            System.out.print("5)  Deserialize Movies from a file\n");
+            System.out.print("6)  Filter Movies by Release Year\n");
+            System.out.print("7)  Filter Movies by Actor[s]\n");
+            System.out.print("8)  Update a Movie's Ratings\n");
+            System.out.print("9)  Update a Movie's Business Done\n");
+            System.out.print("10) Filter Movies by Business Done\n");
+            System.out.print("11) Show Movies\n");
+            System.out.print("12) Exit\n");
 
             sc = new Scanner(System.in);
             System.out.print("Choice: ");
@@ -88,8 +89,8 @@ public class RunSystem {
             if (choice == 1) {
                 System.out.print("Enter file path with extension (enter d for defaults): ");
                 String fName = sc.next().toLowerCase();
-                if (fName.equals("d")) fName = "\\db\\Movies.txt";
-                movies = mm.deserializeMovie(cwd + fName);
+                if (fName.equals("d")) fName = cwd + "\\db\\Movies.txt";
+                movies = mm.readFromFile(fName);
                 printer(movies);
             }
             else if (choice == 2) {
@@ -143,10 +144,16 @@ public class RunSystem {
             else if (choice == 4) {
                 System.out.print("Enter file name with extension (enter d for defaults): ");
                 String fName = sc.next().toLowerCase();
-                if (fName.equals("d")) fName = "CustomMovies.txt";
+                if (fName.equals("d")) fName = "SerializedData.s";
                 mm.serializeMovies(movies, fName);
             }
             else if (choice == 5) {
+                System.out.print("Enter file name with extension (enter d for defaults): ");
+                String fName = sc.next().toLowerCase();
+                if (fName.equals("d")) fName = "SerializedData.s";
+                movies = mm.deserializeMovie(fName);
+            }
+            else if (choice == 6) {
                 System.out.print("Enter Release Year: ");
                 int year = sc.nextInt();
                 System.out.print("Look in list or database? [0/1]: ");
@@ -158,7 +165,7 @@ public class RunSystem {
                     printer(db.getMoviesReleasedInYear(year));
                 }
             }
-            else if (choice == 6) {
+            else if (choice == 7) {
                 StringBuilder casting = new StringBuilder();
                 System.out.print("Number of Casts: ");
                 int nCasting = sc.nextInt();
@@ -176,7 +183,7 @@ public class RunSystem {
                     printer(db.getMoviesByActor(cast));
                 }
             }
-            else if (choice == 7) {
+            else if (choice == 8) {
                 printer(movies);
                 System.out.print("Enter Movie ID: ");
                 int i = sc.nextInt();
@@ -193,7 +200,7 @@ public class RunSystem {
                     db.updateRatings(mov, r);
                 }
             }
-            else if (choice == 8) {
+            else if (choice == 9) {
                 printer(movies);
                 System.out.print("Enter Movie ID: ");
                 int i = sc.nextInt();
@@ -210,17 +217,17 @@ public class RunSystem {
                     db.updateBusiness(mov, b);
                 }
             }
-            else if (choice == 9) {
+            else if (choice == 10) {
                 System.out.print("Enter Business Amount: ");
                 double amount = sc.nextDouble();
                 Set<Movie> movieSet = mm.businessDone(amount, movies);
                 System.out.print("Movies with higher Business Amount:-\n");
                 printer(new ArrayList<>(movieSet));
             }
-            else if (choice == 10) {
+            else if (choice == 11) {
                 printer(movies);
             }
-            else if (choice == 11) {
+            else if (choice == 12) {
                 sc.close();
                 db.close();
                 System.out.println("Closing...");
